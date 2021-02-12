@@ -1,4 +1,4 @@
-name: build-test-lint
+name: run-test-lint
 on: [push]
 
 jobs:
@@ -28,5 +28,3 @@ jobs:
           scripts/checked-timeout 30 xvfb-run npm run electron:testserve
           echo "::endgroup::"
           echo "Application started succesfully!"
-
-
