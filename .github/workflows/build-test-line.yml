@@ -10,7 +10,9 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v2
         with:
-          path: ~/.npm
+          path: |
+            ~/.npm
+            node_modules
           key: small-npm-deps-${{ hashFiles('**/package-lock.json') }}
           restore-keys: small-npm-deps-
       - name: Use Node.js
@@ -25,7 +27,7 @@ jobs:
       - name: Can serve/start application
         run: |
           echo "::group::Building application"
-          scripts/checked-timeout 90 xvfb-run npm run electron:testserve
+          scripts/checked-timeout 30 xvfb-run npm run electron:testserve
           echo "::endgroup::"
           echo "Application started succesfully!"
 
