@@ -79,7 +79,10 @@ function createWindow() {
       console.log('Successfully opened page! 1');
       if (process.argv.includes('--shutdown-on-pageload')) {
         app.quit();
+        wrapper.kill('SIGTERM');
       }
+    }).catch((e) => {
+      console.log('Error in loading url?', e);
     });
     if (!process.env.IS_TEST) win.webContents.openDevTools();
   } else {
