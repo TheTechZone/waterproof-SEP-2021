@@ -23,4 +23,10 @@ jobs:
       - name: Run unit tests
         run: npm run test:unit
       - name: Can serve/start application
-        run: scripts/checked-timeout 90 xvfb-run npm run electron:testserve
+        run: |
+          echo "::group::Building application"
+          scripts/checked-timeout 90 xvfb-run npm run electron:testserve
+          echo "::endgroup::"
+          echo "Application started succesfully!"
+
+
