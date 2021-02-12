@@ -74,7 +74,13 @@ function createWindow() {
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
-    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
+    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL).then(() => {
+      console.log(process.argv);
+      if (process.argv.includes('--shutdown-on-pageload')) {
+        console.log('Successfully opened page!');
+        app.quit();
+      }
+    });
     if (!process.env.IS_TEST) win.webContents.openDevTools();
   } else {
     createProtocol('app');
@@ -83,8 +89,12 @@ function createWindow() {
     if (process.argv.length > 1) {
       // TODO check on different platforms
       win.loadURL('app://./index.html?location=' + encodeURIComponent(process.argv[1]));
+      console.log('loaded url!');
     } else {
-      win.loadURL('app://./index.html');
+      win.loadURL('app://./index.html').then(() => {
+        console.log('Thenable -> loaded url');
+      });
+      console.log('loaded url!');
     }
   }
 

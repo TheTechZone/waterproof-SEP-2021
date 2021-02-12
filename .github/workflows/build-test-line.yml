@@ -17,10 +17,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - run: npm install
+      - run: npm ci
       - name: Lint sources
         run: npm run lint
       - name: Run unit tests
         run: npm run test:unit
       - name: Can serve/start application
-        run: scripts/checked-timeout 60 xvfb-run npx --no-install vue-cli-service electron:serve
+        run: scripts/checked-timeout 90 xvfb-run npx --no-install vue-cli-service electron:serve --shutdown-on-pageload
