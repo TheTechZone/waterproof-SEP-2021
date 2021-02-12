@@ -23,4 +23,4 @@ jobs:
       - name: Run unit tests
         run: npm run test:unit
       - name: Can serve/start application
-        run: scripts/checked-timeout 90 xvfb-run npx --no-install vue-cli-service electron:serve --shutdown-on-pageload
+        run: scripts/checked-timeout 90 xvfb-run npm run electron:testserve
