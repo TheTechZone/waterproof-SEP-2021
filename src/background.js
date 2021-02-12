@@ -76,7 +76,7 @@ function createWindow() {
     // Load the url of the dev server if in development mode
     console.log('branch 1');
     console.log(process.env.WEBPACK_DEV_SERVER_URL);
-    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL).then(() => {
+    win.webContents.loadURL(process.env.WEBPACK_DEV_SERVER_URL).then(() => {
       console.log('Successfully opened page! 1');
       if (process.argv.includes('--shutdown-on-pageload')) {
         app.quit();
@@ -84,6 +84,9 @@ function createWindow() {
       }
     }).catch((e) => {
       console.log('Error in loading url?', e);
+    });
+    win.webContents.on('did-finish-load', () => {
+      console.log('did-finish-load');
     });
     if (!process.env.IS_TEST) win.webContents.openDevTools();
   } else {
