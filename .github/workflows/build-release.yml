@@ -8,15 +8,15 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
-    name: Lint the sources and run unit tests
+    name: Build distrubtable version on ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
       - name: Cache node modules
         uses: actions/cache@v2
         with:
           path: ~/.npm
-          key: small-npm-deps-${{ hashFiles('**/package-lock.json') }}-${{ matrix.os }}
-          restore-keys: small-npm-deps-
+          key: small-npm-deps-${{ matrix.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: small-npm-deps-${{ matrix.os }}
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
@@ -26,9 +26,18 @@ jobs:
         run: npm run electron:generate-icons
       - name: Build it
         run: npm run electron:build
+      - name: Locate completed builds
+        id: locate
+        run: node scripts/actions/match-glob.js
+        with:
+          files: |
+            dist_electron/*.AppImage
+            dist_electron/*.exe
+            dist_electron/*.dmg
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
+          name: ${{ steps.locate.outputs.name }}
           path: |
             dist_electron/*.AppImage
             dist_electron/*.exe
