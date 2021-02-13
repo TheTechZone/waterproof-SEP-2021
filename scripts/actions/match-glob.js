@@ -4,7 +4,8 @@ const path = require('path');
 
 // eslint-disable-next-line require-jsdoc
 async function main() {
-  const globs = core.getInput('files');
+  console.log(process.argv);
+  const globs = process.argv.slice(2).join('\n');
   if (globs === '') {
     throw new Error('Must specify some globs!');
   }

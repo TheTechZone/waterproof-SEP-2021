@@ -28,12 +28,7 @@ jobs:
         run: npm run electron:build
       - name: Locate completed builds
         id: locate
-        run: node scripts/actions/match-glob.js
-        with:
-          files: |
-            dist_electron/*.AppImage
-            dist_electron/*.exe
-            dist_electron/*.dmg
+        run: node scripts/actions/match-glob.js dist_electron/*.AppImage dist_electron/*.exe dist_electron/*.dmg
       - name: Upload Artifacts
         uses: actions/upload-artifact@v2
         with:
