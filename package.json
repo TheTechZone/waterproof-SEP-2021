@@ -81,7 +81,7 @@
     "@iktakahiro/markdown-it-katex": "^4.0.1",
     "async-mutex": "^0.3.1",
     "bootstrap-vue": "^2.21.2",
-    "codemirror": "^5.61.0",
+    "codemirror": "^5.65.1",
     "jquery": "^3.6.0",
     "lodash.debounce": "^4.0.8",
     "lodash.orderby": "^4.6.0",
