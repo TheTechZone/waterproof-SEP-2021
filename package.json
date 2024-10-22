@@ -92,7 +92,7 @@
     "s-expression": "^3.1.1",
     "sass-loader": "^10",
     "style-resources-loader": "^1.4.1",
-    "vue": "^2.6.12",
+    "vue": "^3.0.0",
     "vue-codemirror": "^4.0.6",
     "vue-context": "^4.1.1",
     "vue-drag-resize": "^1.5.1",
